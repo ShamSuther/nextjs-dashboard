@@ -9,7 +9,8 @@ import {
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { updateInvoice, State } from '@/app/lib/actions';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect } from 'react';
 
 export default function EditInvoiceForm({
   invoice,
@@ -156,8 +157,17 @@ export default function EditInvoiceForm({
         >
           Cancel
         </Link>
-        <Button type="submit">Edit Invoice</Button>
+        <SubmitButton />
       </div>
     </form>
   );
 }
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" aria-disabled={pending}>
+      {pending ? 'Editing ...' : 'Edit Invoice'}
+    </Button>
+  );
+};
