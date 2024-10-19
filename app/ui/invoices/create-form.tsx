@@ -10,10 +10,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { createInvoice, State } from '@/app/lib/actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [state, formAction] = useFormState(createInvoice, initialState);
 
   return (
@@ -147,7 +148,13 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit">Create Invoice</Button>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          onClick={() => setIsSubmitting(!isSubmitting)}
+        >
+          {isSubmitting ? 'Processing...' : 'Create Invoice'}
+        </Button>
       </div>
     </form>
   );
