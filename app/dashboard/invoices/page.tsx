@@ -6,7 +6,11 @@ import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import InvoicesTable from '@/app/ui/invoices/table';
 import { fetchInvoicesPages } from '@/app/lib/data';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 export default async function Page({
   searchParams,

@@ -1,25 +1,20 @@
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-
 import { roboto } from '@/app/ui/fonts';
-import { fetchCardData } from '@/app/lib/data';
 import { Suspense } from 'react';
-
 import CardWrapper, { Card } from '@/app/ui/dashboard/cards';
 import {
   LatestInvoicesSkeleton,
   RevenueChartSkeleton,
   CardsSkeleton,
 } from '@/app/ui/skeletons';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
 
 export default async function Page() {
-  const {
-    numberOfCustomers,
-    numberOfInvoices,
-    totalPaidInvoices,
-    totalPendingInvoices,
-  } = await fetchCardData();
-
   return (
     <main>
       <h1 className={`${roboto.className} mb-4 text-xl md:text-2xl`}>
